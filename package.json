@@ -1,0 +1,29 @@
+{
+  "name": "bank-system",
+  "version": "1.0.0",
+  "description": "![image](./images/bank-system.png)",
+  "main": "./src/app.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch --env-file=.env ./src/app",
+    "dev": "node --watch --env-file=.env ./src/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mount-isaac/bank-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mount-isaac/bank-system/issues"
+  },
+  "homepage": "https://github.com/mount-isaac/bank-system#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
