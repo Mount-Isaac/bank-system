@@ -2,15 +2,17 @@
   "name": "bank-system",
   "version": "1.0.0",
   "description": "![image](./images/bank-system.png)",
-  "main": "./src/app.js",
-  "type": "module",
+  "main": "./src/app.ts",
+  "allowImportingTsExtensions": true,
   "directories": {
     "test": "tests"
-  },
+  },  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch --env-file=.env ./src/app",
-    "dev": "node --watch --env-file=.env ./src/app"
+    "dev": "nodemon --exec ts-node ./src/app.ts",
+    "dev:tsx": "tsx watch /src/app.ts",
+    "start": "ts-node /src/app.ts",
+    "build": "tsc",
+    "prod": "node dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,16 @@
   },
   "homepage": "https://github.com/mount-isaac/bank-system#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.4",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }
