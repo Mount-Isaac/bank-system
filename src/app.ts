@@ -8,6 +8,7 @@ import "./models/User"
 import "./models/Transaction"
 import "./models/AuditLog"
 import "./models/Session"
+import "./models/Notification"
 
 // routes
 import userRouter from './routes/users'
