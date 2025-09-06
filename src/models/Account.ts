@@ -79,3 +79,5 @@ export const Account = sequelize.define<Model<AccountAttributes>>("accounts", {
         defaultValue: DataTypes.NOW,
     },
 });
+
+// Account.init({...}), { sequelize, modelName: "Account"}

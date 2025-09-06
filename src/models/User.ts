@@ -21,7 +21,6 @@ export interface User extends BaseEntity {
     twoFactorEnabled: boolean
 }
 
-
 export const Users  = sequelize.define<Model<User>>("users", {
     id: {
         type: DataTypes.UUID,
@@ -34,7 +33,7 @@ export const Users  = sequelize.define<Model<User>>("users", {
     },
     passwordHash: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     firstName: {
         type: DataTypes.STRING,

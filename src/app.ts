@@ -5,6 +5,7 @@ import { sequelize } from './config/database'
 // db models
 import "./models/Account"
 import "./models/User"
+import "./models/Transaction"
 
 dotenv.config()
 

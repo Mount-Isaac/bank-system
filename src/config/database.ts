@@ -28,7 +28,11 @@ export const sequelize = new Sequelize(
             idle: dbConfig.pool_idleTiemout,
             
         },
-        logging: false
+        logging: false,
+        define: {
+            underscored: true,
+            freezeTableName: true
+        }
     }
     
 )
