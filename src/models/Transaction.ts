@@ -2,6 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { Currency, TransactionStatus, TransactionType } from "../types/enums";
 import { BaseEntity } from "./Base";
+import { Users } from "./User";
 
 export interface TransactionAttributes extends BaseEntity {
     fromAccountId: string;
@@ -18,7 +19,7 @@ export interface TransactionAttributes extends BaseEntity {
     balanceAfter?: string;
 }
 
-export const Transaction = sequelize.define<Model<TransactionAttributes>>("transactions", {
+export const Transactions = sequelize.define<Model<TransactionAttributes>>("transactions", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -29,43 +30,52 @@ export const Transaction = sequelize.define<Model<TransactionAttributes>>("trans
         allowNull: false
     },
     toAccountId: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     transactionType: {
-        type: DataTypes.STRING
+        type: DataTypes.ENUM(...Object.values(TransactionType)),
+        allowNull: false
     },
     amount: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     currency: {
-        type: DataTypes.STRING
+        type: DataTypes.ENUM(...Object.values(Currency)),
+        allowNull: false,
     },
     description: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     referenceNumber: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     status: {
-        type: DataTypes.STRING
+        type: DataTypes.ENUM(...Object.values(TransactionStatus)),
+        allowNull: false,
     },
     processedAt: {
-        type: DataTypes.STRING
+        type: DataTypes.DATE,
+        allowNull: false,
     },
     failureReason: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     metadata: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     balanceAfter: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-    createdAt: {
-        type: DataTypes.DATE
-    },
-    updatedAt: {
-        type: DataTypes.DATE
-    },
-    
-})
+}, {
+    timestamps: true
+});
+
+Transactions.belongsTo(Users, { foreignKey: "userId" });
+Users.hasMany(Transactions, { foreignKey: "userId" });

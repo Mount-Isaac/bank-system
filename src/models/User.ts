@@ -18,7 +18,9 @@ export interface User extends BaseEntity {
     failedLoginAttempts: number;
     lockedUntil?: Date;
     twoFactorSecret?: string;
-    twoFactorEnabled: boolean
+    twoFactorEnabled: boolean;
+    // createdAt?: Date;
+    // updatedAt?: Date;
 }
 
 export const Users  = sequelize.define<Model<User>>("users", {
@@ -56,7 +58,7 @@ export const Users  = sequelize.define<Model<User>>("users", {
         allowNull: true,
     },
     role: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(...Object.values(UserRole)),
         defaultValue: UserRole.CUSTOMER
     },
     isVerified: {
@@ -86,15 +88,7 @@ export const Users  = sequelize.define<Model<User>>("users", {
     twoFactorEnabled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: null,
-        onUpdate: sequelize.literal('CURRENT_TIMESTAMP') as unknown as string
-    }
+    }, 
+}, {
+    timestamps: true
 })

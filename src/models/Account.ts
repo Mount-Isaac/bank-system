@@ -2,6 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { AccountStatus, Accounttype, Currency } from "../types/enums";
 import { BaseEntity } from "./Base";
+import { Users } from "./User";
 
 export interface AccountAttributes extends BaseEntity{
     userId: string;
@@ -17,7 +18,7 @@ export interface AccountAttributes extends BaseEntity{
     monthlyTransactionLimit?: string;
 }
 
-export const Account = sequelize.define<Model<AccountAttributes>>("accounts", {
+export const Accounts = sequelize.define<Model<AccountAttributes>>("accounts", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -68,16 +69,9 @@ export const Account = sequelize.define<Model<AccountAttributes>>("accounts", {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-    },
+}, {
+    timestamps: true
 });
 
-// Account.init({...}), { sequelize, modelName: "Account"}
+Accounts.belongsTo(Users, { foreignKey: "user_id" });
+Users.hasMany(Accounts, { foreignKey: "user_id" });

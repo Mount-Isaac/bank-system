@@ -6,6 +6,11 @@ import { sequelize } from './config/database'
 import "./models/Account"
 import "./models/User"
 import "./models/Transaction"
+import "./models/AuditLog"
+import "./models/Session"
+
+// routes
+import userRouter from './routes/users'
 
 dotenv.config()
 
@@ -15,6 +20,9 @@ const app = express()
 // default request middlewares
 app.use(express.json())
 app.use(express.urlencoded( { extended: true }))
+
+// customer routes
+app.use('/users', userRouter)
 
 
 sequelize.authenticate()

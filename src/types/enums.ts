@@ -41,3 +41,17 @@ export enum Currency {
     GBP = 'GBP',
     EUR = 'EUR'
 }
+
+export enum Channel {
+    EMAIL = 'email',
+    SMS = 'sms',
+    PUSH = 'push',
+    IN_APP = 'in_app',
+}
+
+export enum Status {
+    PENDING = 'pending',
+    SENT = 'sent',
+    FAILED = 'failed',
+    READ = 'read',
+}
