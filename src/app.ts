@@ -15,7 +15,7 @@ import userRouter from './routes/users'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/notFound'
 
-dotenv.config()
+dotenv.config({ quiet: true, debug: false})
 
 const port = process.env.NODE_PORT
 const app = express()
