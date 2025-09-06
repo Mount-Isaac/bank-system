@@ -12,6 +12,8 @@ import "./models/Notification"
 
 // routes
 import userRouter from './routes/users'
+import { errorHandler } from './middleware/errorHandler'
+import { notFound } from './middleware/notFound'
 
 dotenv.config()
 
@@ -23,8 +25,11 @@ app.use(express.json())
 app.use(express.urlencoded( { extended: true }))
 
 // customer routes
-app.use('/users', userRouter)
+app.use('/api/users', userRouter)
 
+// 404 not found routes 
+app.use(notFound)
+app.use(errorHandler)
 
 sequelize.authenticate()
     .then(()=>{
