@@ -19,8 +19,6 @@ export interface User extends BaseEntity {
     lockedUntil?: Date;
     twoFactorSecret?: string;
     twoFactorEnabled: boolean;
-    // createdAt?: Date;
-    // updatedAt?: Date;
 }
 
 export const Users  = sequelize.define<Model<User>>("users", {
@@ -30,31 +28,33 @@ export const Users  = sequelize.define<Model<User>>("users", {
         primaryKey: true
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true,
     },
     passwordHash: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     firstName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     lastName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     phoneNumber: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     dateOfBirth: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
+        defaultValue: null,
     },
     address: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     role: {
@@ -70,19 +70,21 @@ export const Users  = sequelize.define<Model<User>>("users", {
         defaultValue: false
     },
     lastLoginAt: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: true,
+        defaultValue: null,
     },
     failedLoginAttempts: {
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
     lockedUntil: {
-        type: DataTypes.STRING,
-        allowNull: true
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
     },
     twoFactorSecret: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: true,
     },
     twoFactorEnabled: {
@@ -90,5 +92,17 @@ export const Users  = sequelize.define<Model<User>>("users", {
         defaultValue: false
     }, 
 }, {
-    timestamps: true
-})
+    timestamps: true,
+    indexes: [
+        { fields: ["email"] },
+        { fields: ["first_name"] },
+        { fields: ["phone_number"] },
+        { fields: ["role"] },
+        { name: "idx_user_composite", fields: [ 
+            { name: "email", length:100 },
+            { name: "first_name", length:50 },
+            { name: "phone_number", length:30 },
+            { name: "role", length:20 }]
+        },
+    ],
+});
