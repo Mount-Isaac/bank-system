@@ -1,25 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { Currency, TransactionStatus, TransactionType } from "../types/enums";
-import { BaseEntity } from "./Base";
+import { transactionAttributes } from "../types/types";
 import { Users } from "./User";
 
-export interface TransactionAttributes extends BaseEntity {
-    fromAccountId: string;
-    toAccountId: string;
-    transactionType: TransactionType;
-    amount: string;
-    currency: Currency;
-    description: string;
-    referenceNumber: string;
-    status: TransactionStatus;
-    processedAt?: Date;
-    failureReason?: string;
-    metadata?: Record<string, any>;
-    balanceAfter?: string;
-}
-
-export const Transactions = sequelize.define<Model<TransactionAttributes>>("transactions", {
+export const Transactions = sequelize.define<Model<transactionAttributes>>("transactions", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

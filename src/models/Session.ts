@@ -1,21 +1,9 @@
-import { BaseEntity } from "./Base";
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { Users } from "./User";
+import { sessionAttributes } from "../types/types";
 
-export interface SessionAttributes extends BaseEntity {
-    userId: string;
-    accesstoken: string;
-    refreshtoken: string;
-    expiresAt: Date;
-    ipAddress: string;
-    userAgent: string;
-    isActive: boolean;
-    lastActivityAt: Date;
-}
-
-
-export const Sessions = sequelize.define<Model<SessionAttributes>>("sessions", {
+export const Sessions = sequelize.define<Model<sessionAttributes>>("sessions", {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,

@@ -14,6 +14,7 @@ import "./models/Notification"
 import userRouter from './routes/users'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/notFound'
+import { Logger } from './middleware/logger'
 
 dotenv.config({ quiet: true, debug: false})
 
@@ -23,6 +24,9 @@ const app = express()
 // default request middlewares
 app.use(express.json())
 app.use(express.urlencoded( { extended: true }))
+
+// logger 
+app.use(Logger)
 
 // customer routes
 app.use('/api/users', userRouter)

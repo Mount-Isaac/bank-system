@@ -1,22 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { Channel, Status } from "../types/enums";
-import { BaseEntity } from "./Base";
 import { Users } from "./User";
+import { notificationAttributes } from "../types/types";
 
-export interface NotificationAttributes extends BaseEntity {
-    userId: string;
-    type: string;
-    title: string;
-    message: string;
-    channel: Channel;
-    status:  Status;
-    sentAt?: Date;
-    readAt?: Date;
-    metadata?: Record<string, any>;
-}
-
-export const Notifications = sequelize.define<Model<NotificationAttributes>>("notifications", {
+export const Notifications = sequelize.define<Model<notificationAttributes>>("notifications", {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,

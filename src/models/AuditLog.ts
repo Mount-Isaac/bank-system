@@ -1,21 +1,9 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
-import { BaseEntity } from "./Base";
 import { Users } from "./User";
+import { auditLongAttributes } from "../types/types";
 
-export interface AuditLongAttributes extends BaseEntity {
-    userId?: string;
-    action: string;
-    entityType: string;
-    entityId: string;
-    oldValues?: Record<string, any>;
-    newValues?: Record<string, any>;
-    ipAddress: string;
-    userAgent: string;
-    sessionId?: string;
-}
-
-export const AuditLogs = sequelize.define<Model<AuditLongAttributes>>("audit_logs", {
+export const AuditLogs = sequelize.define<Model<auditLongAttributes>>("audit_logs", {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,

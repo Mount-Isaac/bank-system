@@ -1,24 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
-import { AccountStatus, Accounttype, Currency } from "../types/enums";
-import { BaseEntity } from "./Base";
 import { Users } from "./User";
+import { accountAttributes } from "../types/types";
+import { AccountStatus, Accounttype, Currency } from "../types/enums";
 
-export interface AccountAttributes extends BaseEntity{
-    userId: string;
-    accountNumber: string;
-    accountType: Accounttype;
-    balance: string;
-    currency: Currency;
-    status: AccountStatus;
-    overdraftLimit?: string;
-    interestRate?: string;
-    minimumBalance?: string;
-    dailyTransactionLimit?: string;
-    monthlyTransactionLimit?: string;
-}
-
-export const Accounts = sequelize.define<Model<AccountAttributes>>("accounts", {
+export const Accounts = sequelize.define<Model<accountAttributes>>("accounts", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

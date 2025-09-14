@@ -1,27 +1,9 @@
 import { DataTypes, Model, UUID } from "sequelize";
 import { sequelize } from "../config/database";
 import { UserRole } from "../types/enums";
-import { BaseEntity } from "./Base";
+import { accountUser } from "../types/types";
 
-export interface User extends BaseEntity {
-    email: string;
-    passwordHash: string;
-    firstName: string; 
-    lastName: string;
-    phoneNumber: string;
-    dateOfBirth?: Date;
-    address?: string;
-    role: UserRole,
-    isVerified: boolean;
-    isActive: boolean;
-    lastLoginAt?: Date;
-    failedLoginAttempts: number;
-    lockedUntil?: Date;
-    twoFactorSecret?: string;
-    twoFactorEnabled: boolean;
-}
-
-export const Users  = sequelize.define<Model<User>>("users", {
+export const Users  = sequelize.define<Model<accountUser>>("users", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
