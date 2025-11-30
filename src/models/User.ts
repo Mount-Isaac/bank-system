@@ -1,13 +1,14 @@
 import { DataTypes, Model, UUID } from "sequelize";
 import { sequelize } from "../config/database";
 import { UserRole } from "../types/enums";
-import { accountUser } from "../types/types";
+import { accountUser, accountUserCreationAttributes } from "../types/types";
 
-export const Users  = sequelize.define<Model<accountUser>>("users", {
+export const Users  = sequelize.define<Model<accountUser, accountUserCreationAttributes>>("users", {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        primaryKey: true,
+        allowNull:false
     },
     email: {
         type: DataTypes.STRING(100),
@@ -72,7 +73,7 @@ export const Users  = sequelize.define<Model<accountUser>>("users", {
     twoFactorEnabled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    }, 
+    }
 }, {
     timestamps: true,
     indexes: [

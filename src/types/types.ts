@@ -1,3 +1,4 @@
+import { Optional } from "sequelize";
 import { UserRole, AccountStatus, Accounttype, Currency, Channel, Status, TransactionStatus, TransactionType } from "./enums";
 
 export interface HttpError extends Error{
@@ -29,6 +30,8 @@ export interface accountUser extends BaseEntity {
     twoFactorSecret?: string;
     twoFactorEnabled: boolean;
 }
+
+export interface accountUserCreationAttributes extends Optional<accountUser, "id"> {}
 // ACCOUNT
 export interface accountAttributes extends BaseEntity{
     userId: string;

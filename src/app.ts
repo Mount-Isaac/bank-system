@@ -12,6 +12,8 @@ import "./models/Notification"
 
 // routes
 import userRouter from './routes/users'
+import authRouter from './routes/auth'
+
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/notFound'
 import { Logger } from './middleware/logger'
@@ -30,6 +32,7 @@ app.use(Logger)
 
 // customer routes
 app.use('/api/users', userRouter)
+app.use('/api/auth', authRouter)
 
 // 404 not found routes 
 app.use(notFound)
