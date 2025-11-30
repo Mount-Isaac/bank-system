@@ -17,6 +17,7 @@ import authRouter from './routes/auth'
 import { errorHandler } from './middleware/errorHandler'
 import { notFound } from './middleware/notFound'
 import { Logger } from './middleware/logger'
+import { authMiddleware } from './middleware/auth'
 
 dotenv.config({ quiet: true, debug: false})
 
@@ -31,7 +32,7 @@ app.use(express.urlencoded( { extended: true }))
 app.use(Logger)
 
 // customer routes
-app.use('/api/users', userRouter)
+app.use('/api/users', authMiddleware, userRouter)
 app.use('/api/auth', authRouter)
 
 // 404 not found routes 

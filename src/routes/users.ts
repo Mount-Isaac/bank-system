@@ -6,9 +6,9 @@ import { authMiddleware } from "../middleware/auth";
 const router = express.Router()
 
 
-router.post("/", authMiddleware, allUsers)
-router.get("/:id", authMiddleware, validateUserId, singleUser)
-router.put("/:id", authMiddleware, validateUserId, allUsers)
-router.delete("/:id", authMiddleware, validateUserId, allUsers)
+router.post("/", allUsers)
+router.get("/:id", validateUserId, singleUser)
+router.put("/:id", validateUserId, allUsers)
+router.delete("/:id", validateUserId, allUsers)
 
 export default router
